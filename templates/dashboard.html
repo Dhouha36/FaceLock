@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Gestion des Examens</title>
+
+    <!-- Lien vers le CDN de Plotly pour les graphiques -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f4f7fc;
+            color: #333;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 36px;
+            color: #3498db;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            width: 95%;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+
+        .section {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            padding: 20px;
+        }
+
+        .section h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .table th, .table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #3498db;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        .table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .table td {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .table .present {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .table .absent {
+            color: #f44336;
+            font-weight: bold;
+        }
+
+        .graph-container {
+            width: 100%;
+            height: 500px;
+            margin-top: 20px;
+        }
+
+        .graph-container h3 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        /* Styles responsive pour les petits écrans */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 28px;
+            }
+
+            .section {
+                padding: 15px;
+            }
+
+            .table th, .table td {
+                font-size: 12px;
+                padding: 8px 10px;
+            }
+
+            .graph-container {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Dashboard - Gestion des Examens</h1>
+
+    <div class="container">
+        <!-- Section des Examens Programmés -->
+        <div class="section">
+            <h3>Examens Programmés</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nom de l'Examen</th>
+                        <th>Date</th>
+                        <th>Heure</th>
+                        <th>Heure de Fin</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for examen in examens %}
+                        <tr>
+                            <td>{{ examen['nomExamen'] }}</td>
+                            <td>{{ examen['date'] }}</td>
+                            <td>{{ examen['heure'] }}</td>
+                            <td>{{ examen['heureFin'] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Section des Présences aux Examens -->
+        <div class="section">
+            <h3>Présence des Étudiants aux Examens</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nom de l'Examen</th>
+                        <th>Nom de l'Étudiant</th>
+                        <th>Présent</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for presence in presences %}
+                        <tr>
+                            <td>{{ presence['nomExamen'] }}</td>
+                            <td>{{ presence['nom'] }} {{ presence['prenom'] }}</td>
+                            <td class="{{ 'present' if presence['estPresent'] == 1 else 'absent' }}">
+                                {{ 'Oui' if presence['estPresent'] == 1 else 'Non' }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Graphique des Examens -->
+        <div class="graph-container">
+            <h3>Graphique des Examens Programmés</h3>
+            <div>{{ graphique_examens | safe }}</div>
+        </div>
+
+        <!-- Graphique des Visages Détectés -->
+        <div class="graph-container">
+            <h3>Graphique des Visages Détectés</h3>
+            <div>{{ graphique_faces | safe }}</div>
+        </div>
+    </div>
+
+</body>
+</html>

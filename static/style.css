@@ -1,0 +1,192 @@
+/* Style global */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: 'Roboto', sans-serif;
+  color: #fff;
+}
+
+/* Container pour le fond */
+.container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Image de fond en plein écran */
+.container img {
+  width: 100%;
+  height: 100%;
+  /*object-fit: cover;*/
+  /*filter: blur(8px);*/ /* Floute l'image de fond */
+ /*  position: absolute;*/
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+/* Container pour la sélection du rôle */
+.role-selection-box {
+  position: absolute; /* Assurez-vous que la boîte est bien positionnée en haut au centre */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(190, 172, 172, 0.6);
+  padding: 40px;
+  border-radius: 10px;
+  text-align: center;
+  width: 80%;
+  max-width: 650px;
+  box-shadow: 0 4px 12px rgba(80, 79, 79, 0.6);
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+/* Conteneur pour les logos */
+.logos {
+  display: flex;
+  justify-content: space-between; /* Aligne les logos aux extrémités */
+  width: 100%;  /* Assure que le conteneur prend toute la largeur disponible */
+  position: relative;  /* Ajouté pour mieux gérer les éléments à l'intérieur */
+  gap: 20px;
+}
+
+/* Conteneur pour chaque logo et son texte */
+.logo-container {
+  display: flex;
+  flex-direction: row; /* Aligne les éléments (logo + texte) horizontalement */
+  align-items: center; /* Aligne les éléments verticalement au centre */
+  gap: 10px; /* Espacement entre le logo et le texte */
+}
+
+/* Logo ESSTHS à gauche (logo 1) */
+.logo {
+  max-width: 90px;
+  max-height: 90px;
+}
+
+/* Logo Université de Sousse à droite (logo 2) */
+.logo2 {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+/* Style du texte */
+.logo-container p {
+  margin-top: 20px;
+   /* Retire les marges par défaut du paragraphe */
+  font-size: 0.6em !important; /* Ajuste la taille du texte */
+  font-weight: bold; /* Met le texte en gras */
+  color: #0b4b54; /* Assure que le texte est en blanc pour la lisibilité */
+}
+
+
+
+
+/* Titre */
+.role-selection-box h2 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-top: 60px; /* Marge ajustée pour éviter que le titre touche le logo */
+  
+}
+
+/* Texte de l'instruction */
+.role-selection-box p {
+  font-size: 1.2em;
+  margin-bottom: 40px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+
+/* Conteneur des boutons */
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+/* Style des boutons */
+.btn {
+  background-color: #3498db; /* Bleu élégant */
+  color: #fff;
+  font-size: 18px;
+  padding: 15px 35px;
+  border: none;
+  cursor: pointer;
+  border-radius: 50px; /* Coins arrondis */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  font-weight: 600;
+  width: 180px;
+  height: 60px;
+  /* Centrage du texte */
+  display: flex;
+  justify-content: center; /* Centre le texte horizontalement */
+  align-items: center; /* Centre le texte verticalement */
+}
+
+/* Effet de survol pour les boutons */
+.btn:hover {
+  background-color: #2980b9;
+  transform: translateY(-5px); /* Légère élévation du bouton */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* Effet au clic (active) */
+.btn:active {
+  transform: translateY(1px); /* Réduit l'élévation lors du clic */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Style spécifique pour le bouton Étudiant */
+#etudiant-btn {
+  background-color: #2a777c;
+}
+
+#etudiant-btn:hover {
+  background-color: #2a777c;
+}
+
+/* Style spécifique pour le bouton Professeur */
+#professeur-btn {
+  background-color: #82acab;
+}
+
+#professeur-btn:hover {
+  background-color: #82acab;
+}
+
+/* Style pour la section du lien vers le Dashboard */
+.link-container {
+  display: block; /* Testez avec block si flex ne fonctionne pas */
+  padding-top: 65px; /* Espacement au-dessus du lien */
+  text-align: center; /* Centrer le lien */
+}
+
+
+.dashboard-link {
+  font-size: 18px; /* Taille de la police */
+  color: #045992; /* Couleur du texte (verte) */
+  text-decoration: none; /* Supprime le souligné par défaut */
+  font-weight: bold; /* Mettre en gras */
+  transition: color 0.3s ease; /* Transition pour un changement de couleur */
+}
+
+.dashboard-link:hover {
+  color: #0c69a7; /* Changer la couleur du texte au survol */
+  text-decoration: underline; /* Ajouter un souligné au survol */
+}
+
+

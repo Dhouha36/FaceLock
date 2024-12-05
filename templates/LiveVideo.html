@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Lock</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Style global */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            font-family: 'Roboto', sans-serif;
+            color: #fff;
+        }
+
+        /* Container pour le fond */
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Image de fond en plein écran */
+        .container img.background {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        /* Boîte de reconnaissance faciale */
+        .role-selection-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(190, 172, 172, 0.6);
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            width: 80%;
+            max-width: 650px;
+            box-shadow: 0 4px 12px rgba(80, 79, 79, 0.6);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Flux vidéo */
+        .role-selection-box img {
+            max-width: 100%;
+            max-height: 350px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+
+        /* Titre */
+        .role-selection-box h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        /* Conteneur des boutons */
+        .button-container {
+            margin-top: 20px;
+        }
+
+        /* Style des boutons */
+        .btn {
+            background-color: #3498db;
+            color: #fff;
+            font-size: 18px;
+            padding: 15px 35px;
+            border: none;
+            cursor: pointer;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            font-weight: 600;
+            width: 180px;
+            height: 60px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin: 5px;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img class="background" src="../static/ESSTHS.png" alt="Image de fond"> <!-- Remplacez par le chemin de votre image -->
+
+        <div class="role-selection-box">
+            <h2>Reconnaissance Faciale en Cours...</h2>
+
+            <!-- Flux vidéo -->
+            <img src="/video_feed" alt="Flux Vidéo en Direct">
+
+            <!-- Bouton -->
+            <div class="button-container">
+                <button class="btn" onclick="redirectToUserInfo()">Voir tes Informations</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Récupérer le nom détecté depuis le backend
+        function fetchDetectedName() {
+            return fetch('/get_detected_name')
+                .then(response => response.json())
+                .then(data => data.detected_name)
+                .catch(error => {
+                    console.error("Erreur lors de la récupération du nom détecté:", error);
+                    return null;
+                });
+        }
+
+        // Rediriger vers la page des informations utilisateur
+        async function redirectToUserInfo() {
+            const detectedName = await fetchDetectedName();
+            if (detectedName) {
+                window.location.href = `/user_info/${detectedName}`;
+            } else {
+                alert("Nom détecté introuvable !");
+            }
+        }
+    </script>
+</body>
+</html>

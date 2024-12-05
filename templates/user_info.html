@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Lock</title>
+    <style>
+        /* Style global */
+        html, body {
+          margin: 0;
+          padding: 0;
+          height: 100%;
+          width: 100%;
+          font-family: 'Roboto', sans-serif;
+          color: #fff;
+        }
+
+        /* Container pour le fond */
+        .container {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          background-image: url('../static/ESSTHS.png'); /* Remplacez par l'URL de votre image */
+          background-size: cover; /* L'image occupe toute la largeur et la hauteur de l'écran */
+          background-position: center; /* Centrer l'image de fond */
+          background-attachment: fixed; /* Fixer l'image lors du défilement */
+        }
+
+        /* Conteneur pour les détails utilisateur */
+        .user-info {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          background-color: rgba(190, 172, 172, 0.6); /* Fond semi-transparent */
+          padding: 40px;
+          border-radius: 10px;
+          text-align: center;
+          width: 80%;
+          max-width: 650px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
+
+        /* Titre */
+        .user-info h2 {
+          font-size: 2.5em;
+          margin-bottom: 20px;
+          font-weight: bold;
+          letter-spacing: 1px;
+        }
+
+        /* Texte des détails de l'utilisateur */
+        .user-info p {
+          font-size: 1.2em;
+          margin-bottom: 10px;
+          font-weight: 300;
+          letter-spacing: 0.5px;
+        }
+
+        /* Style de l'image de l'utilisateur */
+        .user-info img {
+          margin-top: 20px;
+          width: 150px;
+          height: 150px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+
+        /* Informations sur l'examen */
+        .exam-info {
+          background-color: rgba(50, 48, 48, 0.5); /* Fond sombre mais transparent */
+          padding: 20px;
+          margin-top: 20px;
+          border-radius: 10px;
+          text-align: left;
+          max-width: 650px;
+          margin: 0 auto;
+        }
+
+        .exam-info h3 {
+          font-size: 2em;
+          margin-bottom: 15px;
+          color: #fff;
+        }
+
+        .exam-info p {
+          font-size: 1.1em;
+          color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% if user.error %}
+            <p class="error">{{ user.error }}</p>
+        {% else %}
+            <div class="user-info">
+                <!-- Photo de l'utilisateur -->
+                {% if user.photo %}
+                    <img src="data:image/jpeg;base64,{{ user.photo }}" alt="Photo de {{ user.prenom }} {{ user.nom }}">
+                {% else %}
+                    <img src="placeholder.jpg" alt="Image non disponible">
+                {% endif %}
+                
+                <div class="user-details">
+                    <h2>{{ user.prenom }} {{ user.nom }}</h2>
+                    <p><strong>Statut:</strong> {{ user.role }}</p>
+                </div>
+                <div class="exam-info">
+                  <h3>Informations de l'examen</h3>
+                  <p><strong>Examen :</strong> {{ user.examen }}</p>
+                  <p><strong>Date de l'examen :</strong> {{ user.date }}</p>
+                  <p><strong>Heure :</strong> {{ user.heure }} - {{ user.heureFin }}</p>
+                  <p><strong>Salle :</strong> {{ user.salle or 'Aucune salle assignée' }}</p>
+                </div>
+            </div>
+
+            
+        {% endif %}
+    </div>
+</body>
+</html>

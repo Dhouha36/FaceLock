@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Face Lock</title>
+  <!-- Lien vers le fichier CSS -->
+  <link rel="stylesheet" href="./static/style.css">
+  <script src="../static/script.js"></script>
+  
+</head>
+<body>
+
+  <div class="container">
+    <img src="./static/ESSTHS.png" alt="Full Page Background">
+    
+    <div class="role-selection-box">
+      <div class="logos">
+        <div class="logo-container">
+          <img src="./static/logoEssths.png" alt="ESSTHS Logo" class="logo">
+          <p>Université de Sousse<br> 
+            École Supérieure des Sciences et de la<br> Technologie
+             de Hammam Sousse</p> <!-- Texte associé au premier logo -->
+        </div>
+        <div class="logo-container">
+          <p>République Tunisienne<br>
+            Ministère de l'Enseignement<br>
+            Superieur et de la Recherche<br>
+            Scientifique</p> <!-- Texte associé au second logo -->
+          <img src="./static/universiteSousse.png" alt="Université de Sousse Logo" class="logo2">
+          
+        </div>
+      </div>
+      
+      <h2>Bienvenue à l'ESSTHS</h2>
+      <p>Êtes-vous un étudiant ou un professeur ? Choisissez votre statut :</p>
+
+      <!-- Section avec les boutons -->
+      <div class="button-container">
+        <button class="btn" onclick="redirectToRecognition('student')">Étudiant</button>
+        <button class="btn" onclick="redirectToRecognition('professor')">Professeur</button>
+      </div>
+      <div class="link-container">
+        <a href="/dashboard" class="dashboard-link">Voir le Dashboard des Examens</a>
+      </div>      
+    </div>
+  </div>
+  <script>
+    function redirectToRecognition(role) {
+      // Stocker le rôle pour l'utiliser plus tard si nécessaire
+      localStorage.setItem('userRole', role);
+      window.location.href = './video';  // Redirection vers LiveVideo.html
+    }
+  </script>
+
+</body>
+</html>
